@@ -1,0 +1,8 @@
+name: Lobby
+version: ${project.version}
+main: koral.lobby.Lobby
+api-version: 1.16
+authors: [ koral ]
+description: lobbyutils
+commands:
+  lobby:

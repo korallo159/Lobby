@@ -1,0 +1,5 @@
+#permission to bypass: lobby.bypass.kick
+timetokick: 1080
+
+disablejoinmessage: false
+disablequitmessage: false
