@@ -3,6 +3,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -19,14 +20,18 @@ public class LobbyListener implements Listener {
     Map<String, BukkitTask> task = new HashMap<>();
     private static BukkitTask taskid;
     Lobby plugin;
+    LobbySpawn spawn;
+
 
     public LobbyListener(Lobby plugin) {
         this.plugin = plugin;
+         spawn = new LobbySpawn(plugin);
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        spawn.spawnTeleport(player);
         if (!player.hasPermission("lobby.bypass.kick")) {
             timer.put(player.getUniqueId().toString(), System.currentTimeMillis() / 1000 + plugin.getConfig().getInt("timetokick"));
             kickTimer(player);
@@ -53,6 +58,7 @@ public class LobbyListener implements Listener {
             }
         }
     }
+
 
 
     public void kickTimer(Player player) {

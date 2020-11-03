@@ -6,3 +6,5 @@ authors: [ koral ]
 description: lobbyutils
 commands:
   lobby:
+  setspawn:
+  spawn:
