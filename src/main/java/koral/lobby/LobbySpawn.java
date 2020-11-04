@@ -12,14 +12,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+
 import java.io.File;
 import java.io.IOException;
 
 public class LobbySpawn implements Listener, CommandExecutor {
-    File LocationFile;
-    YamlConfiguration Location;
+   public static File LocationFile;
+   public static YamlConfiguration Location;
     Lobby plugin;
-
     public LobbySpawn(Lobby plugin) {
         this.plugin = plugin;
         this.LocationFile = new File(this.plugin.getDataFolder(), "Location.yml");
@@ -71,7 +72,7 @@ public class LobbySpawn implements Listener, CommandExecutor {
 
 
         if (cmd.getName().equalsIgnoreCase("spawn") && args.length == 0) {
-            if (LocationFile.exists()) {
+            if (LocationFile.exists() && LocationFile != null) {
                 spawnTeleport(player);
             } else {
                 player.sendMessage(ChatColor.RED + "SPAWN NIE JEST USTAWIONY");
@@ -81,6 +82,7 @@ public class LobbySpawn implements Listener, CommandExecutor {
         }
         return true;
     }
+
 
 
     void saveLocationFile() {

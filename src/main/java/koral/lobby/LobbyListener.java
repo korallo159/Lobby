@@ -36,7 +36,6 @@ public class LobbyListener implements Listener {
             timer.put(player.getUniqueId().toString(), System.currentTimeMillis() / 1000 + plugin.getConfig().getInt("timetokick"));
             kickTimer(player);
         }
-
         if(plugin.getConfig().getBoolean("disablejoinmessage"))
             e.setJoinMessage("");
     }
@@ -49,8 +48,11 @@ public class LobbyListener implements Listener {
             e.setQuitMessage("");
         }
     @EventHandler
-    public void playerChatEvent(AsyncPlayerChatEvent e){
+    public void onAsyncplayerChatEvent(AsyncPlayerChatEvent e){
         Player p = e.getPlayer();
+        if(!p.hasPermission("lobby.bypass.adminchat"))
+        e.setFormat("§7"+ p.getName() + "§7: §f" + e.getMessage());
+        else e.setFormat("§4"+ p.getName() + "§7: §f" + e.getMessage());
         if(freeze){
             if(!p.hasPermission("lobby.bypass.chat")) {
                 p.sendMessage(ChatColor.RED + "Czat został wyłączony przez administratora, nie możesz wysyłać wiadomości.");

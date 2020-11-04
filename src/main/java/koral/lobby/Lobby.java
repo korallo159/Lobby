@@ -11,8 +11,8 @@ public final class Lobby extends JavaPlugin {
     new File(getDataFolder() + File.separator + "config.yml");
     this.saveDefaultConfig();
     this.spawn = new LobbySpawn(this);
-    this.spawn.saveLocationFile();
     this.listener = new LobbyListener(this);
+    this.spawn.saveLocationFile();
     this.getServer().getPluginManager().registerEvents(listener, this);
     this.getServer().getPluginManager().registerEvents(spawn, this);
     getCommand("lobby").setExecutor(new LobbyCommands(this));
